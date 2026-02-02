@@ -16,6 +16,7 @@
   let collectibles = [];
   let animationFrame;
   let timerInterval;
+  let missionTimeout;
 
   onMount(() => {
     startGame();
@@ -28,6 +29,7 @@
   function cleanup() {
     if (animationFrame) cancelAnimationFrame(animationFrame);
     if (timerInterval) clearInterval(timerInterval);
+    if (missionTimeout) clearTimeout(missionTimeout);
   }
 
   function startGame() {
@@ -158,7 +160,7 @@
     gameWon = won;
 
     if (won) {
-      setTimeout(() => {
+      missionTimeout = setTimeout(() => {
         gameStore.completeMission(planet.id);
       }, 1500);
     }
@@ -304,7 +306,7 @@
     border-radius: 20px;
     background: radial-gradient(
         ellipse at center,
-        rgba(var(--planet-color), 0.1),
+        color-mix(in srgb, var(--planet-color) 20%, transparent),
         transparent
       ),
       linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 100%);

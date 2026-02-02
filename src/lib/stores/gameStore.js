@@ -60,11 +60,15 @@ function createGameStore() {
                 return p;
             });
 
+            const nextStamps = s.stamps.includes(planetId)
+                ? s.stamps
+                : [...s.stamps, planetId];
+
             return {
                 ...s,
                 currentScene: 'victory',
                 planets: updatedPlanets,
-                stamps: [...s.stamps, planetId]
+                stamps: nextStamps
             };
         }),
 
@@ -72,7 +76,7 @@ function createGameStore() {
         isGameComplete: () => {
             let complete = true;
             const unsub = subscribe(s => {
-                complete = s.stamps.length === 8;
+                complete = new Set(s.stamps).size === 8;
             });
             unsub();
             return complete;

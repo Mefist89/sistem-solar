@@ -28,11 +28,11 @@
 declare module '$env/static/private' {
 	export const ACLOCAL_PATH: string;
 	export const ALLUSERSPROFILE: string;
-	export const ANTIGRAVITY_CLI_ALIAS: string;
 	export const APPDATA: string;
 	export const ChocolateyInstall: string;
-	export const ChocolateyLastPathUpdate: string;
 	export const CHROME_CRASHPAD_PIPE_NAME: string;
+	export const CLAUDE_CODE_GIT_BASH_PATH: string;
+	export const CLAUDE_CODE_SSE_PORT: string;
 	export const COLOR: string;
 	export const COLORTERM: string;
 	export const COMMONPROGRAMFILES: string;
@@ -43,6 +43,10 @@ declare module '$env/static/private' {
 	export const DISPLAY: string;
 	export const DriverData: string;
 	export const EDITOR: string;
+	export const EFC_7324_1262719628: string;
+	export const EFC_7324_2283032206: string;
+	export const EFC_7324_2775293581: string;
+	export const EFC_7324_3789132940: string;
 	export const EXEPATH: string;
 	export const GIT_ASKPASS: string;
 	export const HOME: string;
@@ -87,7 +91,6 @@ declare module '$env/static/private' {
 	export const ORIGINAL_PATH: string;
 	export const ORIGINAL_TEMP: string;
 	export const ORIGINAL_TMP: string;
-	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const OS: string;
 	export const PATH: string;
 	export const PATHEXT: string;
@@ -131,7 +134,6 @@ declare module '$env/static/private' {
 	export const WINDIR: string;
 	export const ZES_ENABLE_SYSMAN: string;
 	export const _: string;
-	export const __COMPAT_LAYER: string;
 }
 
 /**
@@ -163,11 +165,11 @@ declare module '$env/dynamic/private' {
 	export const env: {
 		ACLOCAL_PATH: string;
 		ALLUSERSPROFILE: string;
-		ANTIGRAVITY_CLI_ALIAS: string;
 		APPDATA: string;
 		ChocolateyInstall: string;
-		ChocolateyLastPathUpdate: string;
 		CHROME_CRASHPAD_PIPE_NAME: string;
+		CLAUDE_CODE_GIT_BASH_PATH: string;
+		CLAUDE_CODE_SSE_PORT: string;
 		COLOR: string;
 		COLORTERM: string;
 		COMMONPROGRAMFILES: string;
@@ -178,6 +180,10 @@ declare module '$env/dynamic/private' {
 		DISPLAY: string;
 		DriverData: string;
 		EDITOR: string;
+		EFC_7324_1262719628: string;
+		EFC_7324_2283032206: string;
+		EFC_7324_2775293581: string;
+		EFC_7324_3789132940: string;
 		EXEPATH: string;
 		GIT_ASKPASS: string;
 		HOME: string;
@@ -222,7 +228,6 @@ declare module '$env/dynamic/private' {
 		ORIGINAL_PATH: string;
 		ORIGINAL_TEMP: string;
 		ORIGINAL_TMP: string;
-		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		OS: string;
 		PATH: string;
 		PATHEXT: string;
@@ -266,7 +271,6 @@ declare module '$env/dynamic/private' {
 		WINDIR: string;
 		ZES_ENABLE_SYSMAN: string;
 		_: string;
-		__COMPAT_LAYER: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
