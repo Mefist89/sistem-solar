@@ -9,17 +9,21 @@
   function handleClose() {
     gameStore.togglePassport();
   }
+
 </script>
 
-<div
-  class="passport-overlay"
-  transition:fade={{ duration: 200 }}
-  on:click={handleClose}
->
+<div class="passport-overlay" transition:fade={{ duration: 200 }}>
+  <button
+    class="passport-backdrop"
+    type="button"
+    aria-label="Închide pașaportul"
+    on:click={handleClose}
+  ></button>
   <div
     class="passport"
     transition:fly={{ y: 50, duration: 300 }}
-    on:click|stopPropagation
+    role="dialog"
+    aria-modal="true"
   >
     <div class="passport-header">
       <div class="passport-emblem">🌟</div>
@@ -78,6 +82,15 @@
     justify-content: center;
     z-index: 1000;
     backdrop-filter: blur(5px);
+  }
+
+  .passport-backdrop {
+    position: absolute;
+    inset: 0;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
   }
 
   .passport {

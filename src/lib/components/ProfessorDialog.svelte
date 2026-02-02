@@ -7,18 +7,22 @@
   function handleClose() {
     gameStore.closeDialog();
   }
+
 </script>
 
 {#if content}
-  <div
-    class="dialog-overlay"
-    transition:fade={{ duration: 200 }}
-    on:click={handleClose}
-  >
+  <div class="dialog-overlay" transition:fade={{ duration: 200 }}>
+    <button
+      class="dialog-backdrop"
+      type="button"
+      aria-label="Închide dialogul"
+      on:click={handleClose}
+    ></button>
     <div
       class="dialog-box"
       transition:scale={{ duration: 300, start: 0.8 }}
-      on:click|stopPropagation
+      role="dialog"
+      aria-modal="true"
     >
       <div class="professor-avatar">
         <div class="avatar-circle">
@@ -52,6 +56,15 @@
     justify-content: center;
     z-index: 1000;
     backdrop-filter: blur(5px);
+  }
+
+  .dialog-backdrop {
+    position: absolute;
+    inset: 0;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
   }
 
   .dialog-box {

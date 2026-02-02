@@ -166,6 +166,7 @@
     }
   }
 
+
   function retry() {
     startGame();
   }
@@ -189,10 +190,12 @@
       </div>
     </div>
 
-    <div
+    <button
       class="game-area"
       bind:this={gameCanvas}
       on:mousemove={handleMove}
+      type="button"
+      aria-label="Zona de joc"
       style="--planet-color: {planet.color}"
     >
       {#if isPlaying}
@@ -237,7 +240,7 @@
           </button>
         </div>
       {/if}
-    </div>
+    </button>
 
     <div class="controls-hint">
       <p>🖱️ Mișcă mouse-ul sau folosește săgețile ⬆️⬇️⬅️➡️</p>
@@ -300,6 +303,8 @@
   }
 
   .game-area {
+    appearance: none;
+    -webkit-appearance: none;
     flex: 1;
     position: relative;
     margin: 1rem 2rem;
