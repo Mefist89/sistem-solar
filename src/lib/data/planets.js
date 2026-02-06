@@ -8,6 +8,7 @@ export const planets = [
         color: '#b5b5b5',
         orbitRadius: 80,
         size: 20,
+        image: '/planet/mercur.png',
         unlocked: true,
         completed: false,
         facts: [
@@ -27,6 +28,7 @@ export const planets = [
         color: '#e6c47a',
         orbitRadius: 110,
         size: 28,
+        image: '/planet/venus.png',
         unlocked: true,
         completed: false,
         facts: [
@@ -46,6 +48,7 @@ export const planets = [
         color: '#3498db',
         orbitRadius: 145,
         size: 30,
+        image: '/planet/earth.png',
         unlocked: true,
         completed: false,
         facts: [
@@ -65,6 +68,7 @@ export const planets = [
         color: '#e74c3c',
         orbitRadius: 185,
         size: 25,
+        image: '/planet/mars.png',
         unlocked: true,
         completed: false,
         facts: [
@@ -84,6 +88,7 @@ export const planets = [
         color: '#d4a574',
         orbitRadius: 240,
         size: 50,
+        image: '/planet/jupiter.png',
         unlocked: false,
         completed: false,
         facts: [
@@ -103,6 +108,7 @@ export const planets = [
         color: '#f4d03f',
         orbitRadius: 300,
         size: 45,
+        image: '/planet/saturn.png',
         unlocked: false,
         completed: false,
         facts: [
@@ -122,6 +128,7 @@ export const planets = [
         color: '#76d7c4',
         orbitRadius: 355,
         size: 35,
+        image: '/planet/uranus.png',
         unlocked: false,
         completed: false,
         facts: [
@@ -141,6 +148,7 @@ export const planets = [
         color: '#2980b9',
         orbitRadius: 400,
         size: 34,
+        image: '/planet/neptune.png',
         unlocked: false,
         completed: false,
         facts: [

@@ -6,10 +6,24 @@
   $: planets = $gameStore.planets;
   $: isComplete = stamps.length === 8;
 
+  let showResetConfirm = false;
+
   function handleClose() {
     gameStore.togglePassport();
   }
 
+  function handleReset() {
+    showResetConfirm = true;
+  }
+
+  function confirmReset() {
+    gameStore.resetProgress();
+    showResetConfirm = false;
+  }
+
+  function cancelReset() {
+    showResetConfirm = false;
+  }
 </script>
 
 <div class="passport-overlay" transition:fade={{ duration: 200 }}>
@@ -63,9 +77,31 @@
       </div>
     {/if}
 
-    <button class="btn btn-primary close-btn" on:click={handleClose}>
-      Închide
-    </button>
+    <div class="button-group">
+      <button class="btn btn-primary close-btn" on:click={handleClose}>
+        Închide
+      </button>
+
+      {#if stamps.length > 0}
+        <button class="btn reset-btn" on:click={handleReset}>
+          🔄 Resetează
+        </button>
+      {/if}
+    </div>
+
+    {#if showResetConfirm}
+      <div class="reset-confirm">
+        <p>Ești sigur că vrei să resetezi tot progresul?</p>
+        <div class="confirm-buttons">
+          <button class="btn btn-danger" on:click={confirmReset}
+            >Da, resetează</button
+          >
+          <button class="btn btn-secondary" on:click={cancelReset}
+            >Anulează</button
+          >
+        </div>
+      </div>
+    {/if}
   </div>
 </div>
 
@@ -223,8 +259,74 @@
     animation: pulse 2s ease-in-out infinite;
   }
 
+  .button-group {
+    display: flex;
+    gap: 0.5rem;
+  }
+
   .close-btn {
-    width: 100%;
+    flex: 1;
+  }
+
+  .reset-btn {
+    background: rgba(231, 76, 60, 0.3);
+    border: 1px solid rgba(231, 76, 60, 0.6);
+    color: #e74c3c;
+    padding: 0.8rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+  }
+
+  .reset-btn:hover {
+    background: rgba(231, 76, 60, 0.5);
+  }
+
+  .reset-confirm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    border: 2px solid rgba(231, 76, 60, 0.8);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    z-index: 100;
+  }
+
+  .reset-confirm p {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  .confirm-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .btn-danger {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-display);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-display);
   }
 
   @keyframes stampAppear {

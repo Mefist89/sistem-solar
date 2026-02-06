@@ -1,9 +1,15 @@
 <script>
   import { gameStore } from "$lib/stores/gameStore.js";
+  import { planets as planetsData } from "$lib/data/planets.js";
   import { onMount } from "svelte";
 
   $: planet = $gameStore.currentPlanet;
   $: missionUnlocked = $gameStore.missionUnlocked;
+
+  // Получаем изображение из исходных данных планет
+  $: planetImage = planet
+    ? planetsData.find((p) => p.id === planet.id)?.image
+    : null;
 
   function openScanner() {
     gameStore.openScanner();
@@ -26,7 +32,9 @@
 
     <!-- Planeta pe fundal -->
     <div class="planet-display" style="--planet-color: {planet.color}">
-      <div class="planet-sphere"></div>
+      {#if planetImage}
+        <img class="planet-image" src={planetImage} alt={planet.name} />
+      {/if}
       <div class="planet-glow"></div>
     </div>
 
@@ -99,14 +107,12 @@
     height: 400px;
   }
 
-  .planet-sphere {
+  .planet-image {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
-    background: var(--planet-color);
-    box-shadow:
-      inset -40px -40px 80px rgba(0, 0, 0, 0.6),
-      inset 20px 20px 40px rgba(255, 255, 255, 0.1);
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px var(--planet-color));
+    animation: planetRotate 60s linear infinite;
   }
 
   .planet-glow {
@@ -324,6 +330,15 @@
     }
     75% {
       transform: rotate(10deg);
+    }
+  }
+
+  @keyframes planetRotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
     }
   }
 </style>

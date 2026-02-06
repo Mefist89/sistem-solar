@@ -1,17 +1,69 @@
 import { writable } from 'svelte/store';
 import { planets } from '$lib/data/planets.js';
 
+const STORAGE_KEY = 'cosmicOdyssey_progress';
+
+// Загрузка прогресса из localStorage
+function loadProgress() {
+    if (typeof localStorage === 'undefined') return null;
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            return JSON.parse(saved);
+        }
+    } catch (e) {
+        console.warn('Eroare la încărcarea progresului:', e);
+    }
+    return null;
+}
+
+// Сохранение прогресса в localStorage
+function saveProgress(stamps, planetsState) {
+    if (typeof localStorage === 'undefined') return;
+    try {
+        const progress = {
+            stamps,
+            completedPlanets: planetsState.filter(p => p.completed).map(p => p.id),
+            unlockedPlanets: planetsState.filter(p => p.unlocked).map(p => p.id)
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    } catch (e) {
+        console.warn('Eroare la salvarea progresului:', e);
+    }
+}
+
+// Инициализация планет с сохранённым прогрессом
+function initPlanetsWithProgress() {
+    const saved = loadProgress();
+    if (!saved) return [...planets];
+    
+    return planets.map(p => ({
+        ...p,
+        completed: saved.completedPlanets?.includes(p.id) || false,
+        unlocked: saved.unlockedPlanets?.includes(p.id) || p.unlocked
+    }));
+}
+
+// Инициализация штампов с сохранённым прогрессом
+function initStampsWithProgress() {
+    const saved = loadProgress();
+    return saved?.stamps || [];
+}
+
 // Состояние игры
 function createGameStore() {
+    const initialPlanets = initPlanetsWithProgress();
+    const initialStamps = initStampsWithProgress();
+    
     const { subscribe, set, update } = writable({
-        currentScene: 'menu', // menu, map, travel, orbit, minigame, victory
+        currentScene: 'menu',
         currentPlanet: null,
         showDialog: false,
         dialogContent: null,
         showPassport: false,
         showScanner: false,
-        planets: [...planets],
-        stamps: [],
+        planets: initialPlanets,
+        stamps: initialStamps,
         missionUnlocked: false
     });
 
@@ -64,6 +116,9 @@ function createGameStore() {
                 ? s.stamps
                 : [...s.stamps, planetId];
 
+            // Сохранение прогресса
+            saveProgress(nextStamps, updatedPlanets);
+
             return {
                 ...s,
                 currentScene: 'victory',
@@ -82,6 +137,24 @@ function createGameStore() {
             return complete;
         },
 
+        // Полный сброс прогресса
+        resetProgress: () => {
+            if (typeof localStorage !== 'undefined') {
+                localStorage.removeItem(STORAGE_KEY);
+            }
+            set({
+                currentScene: 'menu',
+                currentPlanet: null,
+                showDialog: false,
+                dialogContent: null,
+                showPassport: false,
+                showScanner: false,
+                planets: [...planets],
+                stamps: [],
+                missionUnlocked: false
+            });
+        },
+
         reset: () => set({
             currentScene: 'menu',
             currentPlanet: null,
@@ -89,8 +162,8 @@ function createGameStore() {
             dialogContent: null,
             showPassport: false,
             showScanner: false,
-            planets: [...planets],
-            stamps: [],
+            planets: initPlanetsWithProgress(),
+            stamps: initStampsWithProgress(),
             missionUnlocked: false
         })
     };

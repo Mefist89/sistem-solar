@@ -27,11 +27,11 @@
  */
 declare module '$env/static/private' {
 	export const ALLUSERSPROFILE: string;
+	export const ANTIGRAVITY_CLI_ALIAS: string;
 	export const APPDATA: string;
 	export const ChocolateyInstall: string;
+	export const ChocolateyLastPathUpdate: string;
 	export const CHROME_CRASHPAD_PIPE_NAME: string;
-	export const CLAUDE_CODE_GIT_BASH_PATH: string;
-	export const CLAUDE_CODE_SSE_PORT: string;
 	export const COLOR: string;
 	export const COLORTERM: string;
 	export const CommonProgramFiles: string;
@@ -40,13 +40,9 @@ declare module '$env/static/private' {
 	export const ComSpec: string;
 	export const DriverData: string;
 	export const EDITOR: string;
-	export const EFC_7836_1262719628: string;
-	export const EFC_7836_1592913036: string;
-	export const EFC_7836_2283032206: string;
-	export const EFC_7836_2775293581: string;
-	export const EFC_7836_3789132940: string;
-	export const FPS_BROWSER_APP_PROFILE_STRING: string;
-	export const FPS_BROWSER_USER_PROFILE_STRING: string;
+	export const EFC_5244_1262719628: string;
+	export const EFC_5244_1592913036: string;
+	export const EFC_5244_2283032206: string;
 	export const GIT_ASKPASS: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
@@ -142,11 +138,11 @@ declare module '$env/static/public' {
 declare module '$env/dynamic/private' {
 	export const env: {
 		ALLUSERSPROFILE: string;
+		ANTIGRAVITY_CLI_ALIAS: string;
 		APPDATA: string;
 		ChocolateyInstall: string;
+		ChocolateyLastPathUpdate: string;
 		CHROME_CRASHPAD_PIPE_NAME: string;
-		CLAUDE_CODE_GIT_BASH_PATH: string;
-		CLAUDE_CODE_SSE_PORT: string;
 		COLOR: string;
 		COLORTERM: string;
 		CommonProgramFiles: string;
@@ -155,13 +151,9 @@ declare module '$env/dynamic/private' {
 		ComSpec: string;
 		DriverData: string;
 		EDITOR: string;
-		EFC_7836_1262719628: string;
-		EFC_7836_1592913036: string;
-		EFC_7836_2283032206: string;
-		EFC_7836_2775293581: string;
-		EFC_7836_3789132940: string;
-		FPS_BROWSER_APP_PROFILE_STRING: string;
-		FPS_BROWSER_USER_PROFILE_STRING: string;
+		EFC_5244_1262719628: string;
+		EFC_5244_1592913036: string;
+		EFC_5244_2283032206: string;
 		GIT_ASKPASS: string;
 		HOME: string;
 		HOMEDRIVE: string;
